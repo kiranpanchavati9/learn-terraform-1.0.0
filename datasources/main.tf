@@ -27,9 +27,9 @@ provider "aws" {
 }
 
 resource "aws_instance" "example" {
-  ami              = data.aws_ami.example.id
-  security_groups  = [data.aws_security_group.example.id]
-  instance_type    = "t3.small"
+  ami                    = data.aws_ami.example.id
+  vpc_security_group_ids = [data.aws_security_group.example.id]
+  instance_type          = "t3.small"
   tags = {
     Name = "learn-terraform-1.0.0"
   }
