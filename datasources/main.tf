@@ -14,7 +14,7 @@ output "ami" {
 data "aws_security_group" "example" {
   filter {
     name   = "group-name"
-    values = ["allow-all-traffic-ipv4"]
+    values = ["allow-all"]
   }
 }
 
