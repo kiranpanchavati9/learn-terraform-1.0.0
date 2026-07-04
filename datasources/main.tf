@@ -11,6 +11,29 @@ output "ami" {
   value = data.aws_ami.example
 }
 
+
+data "aws_security_group" "example" {
+    filter {
+        name = "group_name"
+        values = ["allow-all"]
+    }
+output "security_group" {
+    value = data.aws_security_group.example
+}
+
 provider "aws" {
   region = "us-east-1"
+}
+
+
+resource "aws_instance" "example" {
+  ami = data.aws_ami.example.id
+  security_groups = [data.aws_security_group.example.id]
+  instance_type = "t3.small"
+  tags = {
+    Name = "learn-terraform-1.0.0"
+  }
+}
+output "instance" {
+  value = aws_instance.example
 }
