@@ -17,6 +17,7 @@ data "aws_security_group" "example" {
         name = "group_name"
         values = ["allow-all"]
     }
+}
 output "security_group" {
     value = data.aws_security_group.example
 }
