@@ -4,7 +4,7 @@ data "aws_ami" "example" {
     values = ["RHEL-10.2.0_HVM_GA-20260521-x86_64-0-Hourly2-GP3"]
   }
 
-  owners = ["798701233543"]
+  owners = ["309956199498"]
 }
 
 output "ami" {
