@@ -1,10 +1,10 @@
 data "aws_ami" "example" {
   filter {
     name   = "name"
-    values = ["RHEL-9-DevOps-Practice"]
+    values = ["RHEL-10.2.0_HVM_GA-20260521-x86_64-0-Hourly2-GP3"]
   }
 
-  owners           = ["973714476888"] # This is the AWS account ID for the RHEL 9 DevOps Practice AMI   
+  owners           = ["798701233543"] # This is the AWS account ID for the RHEL 9 DevOps Practice AMI   
 }
 
 output "ami" {
