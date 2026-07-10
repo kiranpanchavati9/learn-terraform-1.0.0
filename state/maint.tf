@@ -5,7 +5,6 @@ terraform {
         region = "us-east-1"
     }
 }
-
 output "bucket_name" {
-    value = aws_s3_bucket.terraform_state.bucket
+    value = "test"
 }
