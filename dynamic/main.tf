@@ -1,40 +1,22 @@
 resource "aws_security_group" "splunkers-firewall-rules" {
   name        = "allow-splunkers-firewall-rules"
   description = "Allow Splunk ports inbound traffic and all outbound traffic"
-
-  tags = {
-    Name = "splunkers-firewall-rules"
+  dynamic "ingress" {
+    for_each = var.ports
+    content {
+      from_port   = ingress.value
+      to_port     = ingress.value
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+  }
+  dynamic "egress" {
+    for_each = var.ports
+    content {
+      from_port   = egress.value
+      to_port     = egress.value
+      protocol    = "-1"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
   }
 }
-
-resource "aws_vpc_security_group_ingress_rule" "splunk-management-port" {
-    security_group_id = aws_security_group.splunkers-firewall-rules.id
-    cidr_ipv4         = "0.0.0.0/0"
-    from_port         = 8089
-    to_port           = 8089
-    ip_protocol       = "tcp"
-}
-
-resource "aws_vpc_security_group_ingress_rule" "splunk-data-port" {
-    security_group_id = aws_security_group.splunkers-firewall-rules.id
-    cidr_ipv4         = "0.0.0.0/0"
-    from_port         = 9997
-    to_port           = 9997
-    ip_protocol       = "tcp"
-}
-
-resource "aws_vpc_security_group_ingress_rule" "splunk-web-port" {
-    security_group_id = aws_security_group.splunkers-firewall-rules.id
-    cidr_ipv4         = "0.0.0.0/0"
-    from_port         = 8000
-    to_port           = 8000
-    ip_protocol       = "tcp"
-}
-
-
-resource "aws_vpc_security_group_egress_rule" "splunkers-firewall-rules" {
-    security_group_id = aws_security_group.splunkers-firewall-rules.id
-    cidr_ipv4         = "0.0.0.0/0"
-    ip_protocol       = "-1"
-}
-
