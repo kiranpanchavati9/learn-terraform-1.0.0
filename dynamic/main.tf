@@ -10,13 +10,10 @@ resource "aws_security_group" "splunkers-firewall-rules" {
       cidr_blocks = ["0.0.0.0/0"]
     }
   }
-  dynamic "egress" {
-    for_each = var.ports
-    content {
-      from_port   = egress.value
-      to_port     = egress.value
-      protocol    = "-1"
-      cidr_blocks = ["0.0.0.0/0"]
-    }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
