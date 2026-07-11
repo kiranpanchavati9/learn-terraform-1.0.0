@@ -7,7 +7,7 @@ resource "aws_security_group" "splunkers-firewall-rules" {
   }
 }
 
-resource "aws_security_group_ingress_rule" "splunk-management-port" {
+resource "aws_vpc_security_group_ingress_rule" "splunk-management-port" {
     security_group_id = aws_security_group.splunkers-firewall-rules.id
     cidr_ipv4         = "0.0.0.0/0"
     from_port         = 8089
@@ -15,7 +15,7 @@ resource "aws_security_group_ingress_rule" "splunk-management-port" {
     ip_protocol       = "tcp"
 }
 
-resource "aws_security_group_ingress_rule" "splunk-data-port" {
+resource "aws_vpc_security_group_ingress_rule" "splunk-data-port" {
     security_group_id = aws_security_group.splunkers-firewall-rules.id
     cidr_ipv4         = "0.0.0.0/0"
     from_port         = 9997
@@ -23,7 +23,7 @@ resource "aws_security_group_ingress_rule" "splunk-data-port" {
     ip_protocol       = "tcp"
 }
 
-resource "aws_security_group_ingress_rule" "splunk-web-port" {
+resource "aws_vpc_security_group_ingress_rule" "splunk-web-port" {
     security_group_id = aws_security_group.splunkers-firewall-rules.id
     cidr_ipv4         = "0.0.0.0/0"
     from_port         = 8000
@@ -32,7 +32,7 @@ resource "aws_security_group_ingress_rule" "splunk-web-port" {
 }
 
 
-resource "aws_security_group_egress_rule" "splunkers-firewall-rules" {
+resource "aws_vpc_security_group_egress_rule" "splunkers-firewall-rules" {
     security_group_id = aws_security_group.splunkers-firewall-rules.id
     cidr_ipv4         = "0.0.0.0/0"
     ip_protocol       = "-1"
