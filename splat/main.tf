@@ -28,3 +28,4 @@ output "list" {
 output "mmap" {
     value = { for x,y in var.dummy_ports : "${x}" => y }
 }
+
